@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <h2 style="background-color: #00bcd4; color: white; padding: 10px;">TV Series</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Channel</th>
+            <th scope="col">Seasons</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Agregar click event a cada fila -->
+          <tr *ngFor="let serie of series" (click)="selectSeries(serie)" style="cursor: pointer;">
+            <th scope="row">{{ serie.id }}</th>
+            <td>{{ serie.name }}</td>
+            <td>{{ serie.channel }}</td>
+            <td>{{ serie.seasons }}</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <p><strong>Seasons average: {{ averageSeasons }}</strong></p>
+    </div>
+    
+    <!-- Columna para mostrar el detalle de la serie seleccionada -->
+    <div class="col-4">
+      <div *ngIf="selectedSeries" class="card">
+        <img [src]="selectedSeries.poster" class="card-img-top" [alt]="selectedSeries.name">
+        <div class="card-body">
+          <h5 class="card-title">{{ selectedSeries.name }}</h5>
+          <p class="card-text">{{ selectedSeries.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><strong>Channel:</strong> {{ selectedSeries.channel }}</li>
+          <li class="list-group-item"><strong>Seasons:</strong> {{ selectedSeries.seasons }}</li>
+        </ul>
+        <div class="card-body">
+          <a [href]="selectedSeries.webpage" class="card-link" target="_blank">More info</a>
+        </div>
+      </div>
+      <div *ngIf="!selectedSeries" class="text-muted">
+        <p>Select a series to see details</p>
+      </div>
+    </div>
+  </div>
+</div>
